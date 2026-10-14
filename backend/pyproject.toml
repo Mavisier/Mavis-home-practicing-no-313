@@ -21,6 +21,7 @@ audit = ["pip-audit>=2.9,<3"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+pythonpath = ["."]
 addopts = "--basetemp=../.tmp/pytest"
 
 [tool.ruff]
