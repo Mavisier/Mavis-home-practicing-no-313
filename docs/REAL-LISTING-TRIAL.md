@@ -1,53 +1,39 @@
-# Gerçek ilanlarla yerel deneme — 13 Ekim 2026
+# Yerel girdi denemesi — anonimleştirilmiş kamuya açık özet
 
-Kullanıcı isteği doğrultusunda arabam.com'un herkese açık listesinde bulunan beş güncel ilan seçildi. Arama motorundaki eski örneklerden biri kategori sayfasına yönlendi; o kayıt canlı ilan gibi kullanılmadı.
+13 Ekim 2026'da beş herkese açık araç ilanıyla yerel bir keşif denemesi yapıldı.
+Bu, arabam.com tarafından sağlanmış veya kullanım izni verilmiş bir veri seti değildi.
+Deneme fixture modunda çalıştı; canlı LLM, vision veya iş etkisi doğrulaması yapılmadı.
 
-Normal HTTP isteği erişim kontrolü döndürdüğünden sayfalar normal tarayıcı görünümünden kaydedildi. Giriş yapılmadı, CAPTCHA çözülmedi, özel API veya gizli hesap verisi kullanılmadı.
+## Paylaşım sınırı
 
-## Kaydedilen dosyalar
+Portföyün paylaşılabilir örnekleri kurgusal kayıtlardır. İndirilen HTML, ilan
+açıklamaları, fotoğraflar ve özel yerel rapor Git, Docker ve inceleme ZIP'ine
+dahil değildir. Bu kamuya açık özette bireysel ilan numarası, doğrudan ilan
+bağlantısı veya ilan bazında değerlendirme tablosu bulunmaz.
 
-Her örnek `data/real_listings/<ilan_no>/` altında bulunur:
+14 Ekim 2026'da bu belgedeki gerçek ilan numaraları ve ilan bazındaki sonuçlar
+kaldırıldı. Bu düzenleme güncel sürümü değiştirir; önceki Git commitlerini silmez.
 
-- `original.html`: tarayıcıdaki tam DOM HTML kopyası; son HTML etiketi ve kesilme durumu kontrol edildi.
-- `capture.json`: kaynak URL, yakalama zamanı ve sayfada bulunan görsel adresleri.
-- `images/`: toplam 122 fotoğraf; kaynak URL, dosya hash'i ve gerçek piksel boyutları ölçüldü.
-- `normalized.json`: yalnızca araçla ilgili alanlar, açıklama, kaynak ve görsel metadata'sı.
-- `offline.html`: fotoğrafları yerel dosyalardan açan okunabilir kopya. Satıcı markup'ı escape edilir; sayfa script çalıştırmaz.
+## Genel teknik öğrenimler
 
-Üst dizinde `index.html` ve `report.json` bulunur. Ham kopyalar ve üçüncü taraf fotoğrafları Git/Docker build kapsamı dışında bırakıldı. Bu dosyalar yerel test içindir; hiçbir ilan veya mesaj gerçek platforma gönderilmedi.
+- Başlık ve yapılandırılmış alanlardaki farklılıkları kesin suçlama yerine teyit sorusu olarak ele alma.
+- Açıklamada geçen tutarı yapılandırılmış alana doğrulanmış bilgi gibi otomatik yazmama.
+- Olumsuzlama içeren boya ifadelerinde basit anahtar kelime eşleştirmesinin sınırlarını görme.
+- Site önizlemesinin boyutunu orijinal görsel kalitesi olarak yorumlamama.
+- Sınıflandırılmamış fotoğraflardan açı kapsamı veya hasar sonucu üretmeme.
+- Yerel HTML gösteriminde satıcı markup'ını escape etme ve script çalıştırmama.
 
-## Sonuçlar
+Bu öğrenimler bağımsız demo kurallarına ilişkindir; gerçek araçların durumunu
+veya satıcıların davranışını doğrulamaz. Güncel genel doğrulama kayıtları
+docs/verification altında bulunur; bunlar fixture davranışına ait kayıtlardır.
 
-| İlan | Fotoğraf | Mevcut kuralların bulduğu teyit başlıkları |
-| --- | ---: | --- |
-| 37570454 | 28 | Başlıkta 99.000 km, alanda 104.000 km; yapılandırılmış Tramer tutarı boş |
-| 42746085 | 26 | Boya detayları ve Tramer tutarı belirtilmemiş |
-| 43145023 | 30 | Mevcut kontrol kuralları bulgu üretmedi |
-| 44742589 | 29 | Hasar tutarı açıklamada geçiyor, Tramer alanında belirtilmemiş |
-| 44785121 | 9 | Yapılandırılmış Tramer tutarı belirtilmemiş |
+## İzin ve sonraki demolar
 
-Bunlar ilan beyanları üstündeki kontrollerdir. Başlığın eski kalması bir açıklama olabilir; km müdahalesi veya satıcının kötü niyeti sonucuna varılmaz. Bulgu çıkmaması da araç durumunun doğrulandığı anlamına gelmez.
+arabam.com'un [Bireysel Üyelik Sözleşmesi](https://www.arabam.com/bireysel-uyelik-sozlesmesi)
+6.2 maddesi ilanların kopyalanması, işlenmesi ve yeniden yayımlanmasına ilişkin
+kısıtlamalar içerir. Sayfanın herkese açık olması bu kullanımlara izin verildiği
+anlamına gelmez; denemenin yerel olması da tek başına kullanım izni sağlamaz.
 
-Fotoğrafların hepsi sitedeki 580×435 önizleme varyantlarıdır. Bu boyut, satıcının yüklediği orijinal fotoğrafın kalitesini kanıtlamaz. Açı sınıflandırması yapılmadığından eksik ön/arka/iç/motor fotoğrafı sonucu üretilmedi. Fotoğraflardan hasar, plaka veya araç kimliği çıkarımı yapılmadı.
-
-## Testin sağladığı iyileştirmeler
-
-- Başlık ve kilometre alanı farklılıklarını teyit sorusuna dönüştürme.
-- Açıklamadaki hasar tutarını, boş Tramer alanına doğrulanmış bilgi gibi otomatik yazmama.
-- `Boyasız değil` ve `boyasız göçük düzeltme` ifadelerinde yanlış boya çelişkisini azaltma.
-- Önizleme boyutunu ve sınıflandırılmamış fotoğraf açısını yanlış alarm olarak kullanmama.
-- HTML kopyasını ve görselleri mevcut demo kimliğiyle sunma; ham orijinal dosyayı uygulama origin'inde çalıştırmama.
-
-30 backend testi, lint, TypeScript ve production build geçti. Beş gerçek girdi mevcut fixture workflow ile işlendi; dışarıya veri gönderilmedi, canlı LLM veya vision doğrulaması yapılmadı. Ayrı dört sentetik değerlendirme vakası da geçti.
-
-## Tekrar deneme
-
-Yakalamalar ve görseller mevcutsa, backend ortamında:
-
-```powershell
-.\.venv\Scripts\python.exe -m scripts.import_real_listings --reuse-images
-```
-
-Bu komut dosya hash'lerini kontrol eder, normalizasyonu ve değerlendirmeyi yeniden çalıştırır; görselleri tekrar indirmez. Yeni bir siteden genel crawl yapılmaz. API anahtarı yapılandırılmış canlı model modunda bu komut çalışmaz; yerel gerçek-ilan denemesi fixture moduyla sınırlandırılmıştır.
-
-Ekranda **İndirilen gerçek ilanlar** sekmesi, fotoğraf galerisi, kaynak bağlantısı ve **HTML kopyasını aç** bağlantısı bulunur. Kurgusal örnekler ayrı sekmede korunmuştur.
+Başvuru ve portföy gösterimlerinde kurgusal örnekleri kullanın. İleri bir üçüncü
+taraf veri denemesi için uygun izin veya lisans sağlayın. Ham yerel arşivi
+paylaşılacak pakete eklemeyin. Bu özet hukuki uygunluk garantisi vermez.

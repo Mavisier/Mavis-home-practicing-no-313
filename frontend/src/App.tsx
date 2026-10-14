@@ -156,7 +156,7 @@ function CarIllustration() {
 
 export default function App() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
-  const [selectedId, setSelectedId] = useState("REAL-37570454");
+  const [selectedId, setSelectedId] = useState("ILAN-1001");
   const [dataset, setDataset] = useState<"real" | "demo">("real");
   const [description, setDescription] = useState("");
   const [view, setView] = useState<"workspace" | "tasks" | "history">(

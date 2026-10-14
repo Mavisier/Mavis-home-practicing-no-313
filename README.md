@@ -52,6 +52,10 @@ Public listing snapshots/photos were used in a separate local trial, with proven
 and explicit image-analysis limits. They are excluded from the public repository.
 A clean checkout opens the synthetic examples automatically.
 
+Use synthetic examples for portfolio demonstrations. Publicly visible listings
+are not an automatic license to copy, process or redistribute their content;
+future third-party data use requires appropriate permission or licensing.
+
 ## 4. Architecture
 ```mermaid
 flowchart TD

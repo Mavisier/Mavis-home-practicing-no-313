@@ -44,11 +44,12 @@ def test_explicit_paintless_claim_with_painted_field_is_flagged():
 
 
 def test_copy_button_text_does_not_break_listing_id_parser(tmp_path):
-    folder = tmp_path / "37570454"
+    # Invented identifier for a synthetic parser fixture; not a captured listing ID.
+    folder = tmp_path / "90000001"
     folder.mkdir()
     document = """<!doctype html><html><h1>Toyota 2014 Model İstanbul 104.000 KM</h1>
       <div class="property-item"><div class="property-key">İlan No</div>
-      <div class="property-value">Kopyalandı 37570454</div></div>
+      <div class="property-value">Kopyalandı 90000001</div></div>
       <div class="property-item"><div class="property-key">Yıl</div>
       <div class="property-value">2014</div></div>
       <div class="property-item"><div class="property-key">Kilometre</div>
@@ -59,7 +60,7 @@ def test_copy_button_text_does_not_break_listing_id_parser(tmp_path):
         json.dumps(
             {
                 "title": "Toyota",
-                "url": "https://www.arabam.com/ilan/example/37570454",
+                "url": "https://www.arabam.com/ilan/example/90000001",
                 "captured_at": "2026-10-13T00:00:00Z",
                 "images": [],
             }
