@@ -21,6 +21,7 @@ evals/reports/*.json
 data/real_listings/
 review-package/
 application-materials/
+learning-guide/
 logs/
 *.log
 *.db

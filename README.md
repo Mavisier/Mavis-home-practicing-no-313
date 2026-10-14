@@ -13,8 +13,8 @@ read-only MCP.
 into a controlled AI-assisted process with retrieval, structured reasoning, tool
 use, approval gates, and measurable execution.**
 
-The automotive demo was designed for an arabam.com job application. It is independent
-of arabam.com and does not use private company systems.
+This is an independent automotive-workflow portfolio demo. It is not an official
+arabam.com product, has no company endorsement, and does not use private company systems.
 
 | Status | Capability |
 | --- | --- |
