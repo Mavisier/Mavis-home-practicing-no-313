@@ -49,8 +49,11 @@ class ReviewResult(BaseModel):
     findings: list[Finding] = Field(max_length=50)
     narrative: Narrative
     sources: list[Evidence] = Field(max_length=10)
-    mode: Literal["fixture", "openai", "anthropic"]
+    mode: Literal["fixture", "openai", "anthropic", "ollama"]
     embedding_space: str
+    explanation_kind: Literal["fixture", "approved_empty", "local_summary", "remote_narrative"] = (
+        "fixture"
+    )
     latency_ms: int = Field(ge=0)
     limitations: list[str]
 

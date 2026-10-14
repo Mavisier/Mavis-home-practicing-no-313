@@ -1,0 +1,14 @@
+{
+  "frames": 5,
+  "loop_ms": 20000,
+  "mode": "fixture",
+  "input": "Synthetic ILAN-1001",
+  "capture": "Observed browser UI steps, not a real-time screen recording.",
+  "real_listing_photos": false,
+  "real_listing_identifiers": false,
+  "dimensions": [
+    508,
+    757
+  ],
+  "bytes": 480359
+}

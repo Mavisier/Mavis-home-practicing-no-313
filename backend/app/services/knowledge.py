@@ -12,6 +12,32 @@ from app.models import KnowledgeChunk
 
 def embed(text: str) -> tuple[list[float], str]:
     settings = get_settings()
+    if settings.embedding_provider == "ollama":
+        import httpx
+
+        from app.services.local_model import ollama_origin
+        from app.services.providers import ProviderConfigurationError
+
+        if not settings.embedding_model.strip() or "cloud" in settings.embedding_model.casefold():
+            raise ProviderConfigurationError("Ollama requires a local embedding model.")
+        with httpx.Client(timeout=120, follow_redirects=False, trust_env=False) as client:
+            response = client.post(
+                ollama_origin() + "/api/embed",
+                json={
+                    "model": settings.embedding_model,
+                    "input": text,
+                    "truncate": False,
+                },
+            )
+            response.raise_for_status()
+            vector = response.json()["embeddings"][0]
+            if (
+                not isinstance(vector, list)
+                or not vector
+                or not all(type(v) in (int, float) and math.isfinite(v) for v in vector)
+            ):
+                raise ValueError("Invalid local embedding response")
+            return vector, "ollama:" + settings.embedding_model
     if settings.embedding_provider == "openai":
         import httpx
 

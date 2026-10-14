@@ -60,7 +60,7 @@ def check_vehicle(listing: dict, workflow: str) -> list[dict]:
     if workflow == "listing_review":
         description = normalized(listing["description"])
         if vehicle.get("painted_parts") and re.search(
-            r"\bboyasiz\b(?!\s+(?:degil|gocuk))", description
+            r"\bboyasiz(?:dir)?\b(?!\s+(?:degil|gocuk))", description
         ):
             parts = ", ".join(vehicle["painted_parts"])
             add(
@@ -73,7 +73,9 @@ def check_vehicle(listing: dict, workflow: str) -> list[dict]:
                 "listing-information",
             )
         if vehicle.get("replaced_parts") and re.search(
-            r"\bdegisensiz\b(?!\s+degil)|degisen yok", description
+            r"\bdegisensiz(?:dir)?\b(?!\s+degil)|"
+            r"\bdegisen(?:\s+parca)?\s+yok(?:tur)?\b(?!\s+degil)",
+            description,
         ):
             add(
                 "replacement_contradiction",
@@ -84,7 +86,9 @@ def check_vehicle(listing: dict, workflow: str) -> list[dict]:
                 "listing-information",
             )
         if vehicle.get("damage_record_try", 0) and re.search(
-            r"hasar kaydi yok|\bhasarsiz\b(?!\s+degil)", description
+            r"\bhasar kaydi yok(?:tur)?\b(?!\s+degil)|"
+            r"\bhasarsiz(?:dir)?\b(?!\s+degil)",
+            description,
         ):
             add(
                 "damage_contradiction",

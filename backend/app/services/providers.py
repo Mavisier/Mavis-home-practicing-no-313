@@ -14,6 +14,11 @@ SYSTEM_PROMPT = (
     "Kaynak etiketi gerçek ilan kopyası veya sentetik örnek olduğunu belirtir. "
     "Gerçek fotoğraflar varsa yalnızca dosya boyutları okunmuştur; hasar ve açı analizi yapılmadı. "
     "Yayın, ödeme ve mesaj gönderimi yapamazsın. İnsan onayı backend tarafından yönetilir."
+    " Bulgular listesi kararın tek kaynağıdır; liste boşsa yeni çelişki veya eksik bilgi çıkarma. "
+    "Satıcının niyeti, dürüstlüğü, kusur gizlemesi veya kasıtlı davranışı hakkında yorum yapma. "
+    "Bir kaydın tutarlı bulunması ilan, ekspertiz, satış veya görev onayı değildir. "
+    "Gönderildi, onaylandı, yayımlandı gibi işlem gerçekleştiği iddiasında bulunma. "
+    "Verilen bulguların dışında fiyat, fotoğraf, kilometre veya başka alan eksikliği uydurma."
 )
 
 
@@ -25,6 +30,14 @@ class ReadCall(BaseModel):
 
 class ProviderConfigurationError(ValueError):
     """Safe fixed-message configuration errors; never include credentials."""
+
+
+class ProviderOutputError(ValueError):
+    """A fixed safe rejection reason; candidate content stays in scoped audit records."""
+
+    def __init__(self, message: str, candidate: dict):
+        super().__init__(message)
+        self.candidate = candidate
 
 
 class Provider(Protocol):
@@ -201,4 +214,8 @@ class RemoteProvider:
 
 def get_provider() -> Provider:
     name = get_settings().llm_provider
+    if name == "ollama":
+        from app.services.local_model import OllamaProvider
+
+        return OllamaProvider()
     return FixtureProvider() if name == "fixture" else RemoteProvider(name)

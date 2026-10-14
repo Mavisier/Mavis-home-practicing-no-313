@@ -19,9 +19,10 @@ and synthetic screenshots. Application materials, private configuration, local
 databases, dependencies and real listing/photo archives remain ignored.
 
 The source repository is the review entry point; no hosted application or job
-application submission is claimed. Live providers and neural embeddings are
-implemented but unverified; Docker/native PostgreSQL runtime remains unverified.
-Fixture results do not establish LLM accuracy or business impact.
+application submission is claimed. Actual local Ollama planning/summaries and
+neural embeddings were exercised on 30 synthetic cases, with known semantic errors.
+OpenAI/Anthropic, OpenAI embeddings and Docker/native PostgreSQL remain unverified.
+Structured results and fixture checks do not establish AI accuracy or business impact.
 
 Private vulnerability reporting is enabled for this public repository. See SECURITY.md
 for the demo boundary and the optional n8n platform's documented limitations.

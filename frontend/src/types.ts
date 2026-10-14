@@ -69,6 +69,7 @@ export interface ReviewResult {
   verdict: string;
   mode: string;
   embedding_space: string;
+  explanation_kind?: "fixture" | "approved_empty" | "local_summary" | "remote_narrative";
   latency_ms: number;
   findings: {
     code: string;

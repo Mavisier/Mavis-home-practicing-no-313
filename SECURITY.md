@@ -9,7 +9,7 @@ Secrets/configuration are loaded from environment variables or the ignored local
 `.env`. Never commit `.env`, certificates, private keys, logs, database files,
 `.local`, `.tmp`, dependency installations, real listing downloads or third-party
 photo screenshots. `.env.example` contains explicit dummy development values.
-Fixture mode needs no external API key. Optional live providers fail explicitly
+Fixture mode needs no external API key. Optional remote providers fail explicitly
 when a key/model is missing and do not silently fall back to fixture mode.
 
 Frontend bundles must contain no configured API key or demo credential. The local
@@ -59,7 +59,18 @@ is supplied here.
 ## Known limitations
 
 No production identity provider, rate limiting, cloud deployment, tenant isolation
-or production observability claim is made. Live LLM/neural embeddings and Docker
-runtime are unverified. Image damage/OCR analysis is not implemented. Fixture
+or production observability claim is made. Local Ollama planning/summaries and neural embeddings were exercised, with known
+semantic errors. Generated local summaries are excluded from task arguments;
+questions/drafts are backend-generated. Lexical guards do not establish truth.
+OpenAI/Anthropic, OpenAI embeddings and Docker runtime are unverified. Image damage/OCR analysis is not implemented. Fixture
 evaluation measures contracts and safety behavior, not real-world model quality.
 The heuristic secret scanner is a publication aid, not a security certification.
+
+## Keyless local model
+
+Ollama requests use an allowlisted local origin and explicit local model. Proxy
+inheritance is disabled and no provider credential is attached. Archived REAL-*
+records are blocked unless both generation and embedding providers are fixture.
+Do not expose the local Ollama server publicly. Model summaries can still invent
+facts; inspect typed findings and sources before approval. Audit logs contain
+request/source/model text and require a retention policy for real deployments.

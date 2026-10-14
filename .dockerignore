@@ -1,4 +1,11 @@
 .env
+.env.*
+!.env.example
+.git
+application-materials
+learning-guide
+review-package
+logs
 .tmp
 .local
 **/.venv

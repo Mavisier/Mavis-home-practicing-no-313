@@ -69,6 +69,7 @@ const events: Record<string, string> = {
   action_rejected: "Öneri reddedildi",
   tool_executed: "Operasyon görevi açıldı",
   workflow_failed: "İş akışı durduruldu",
+  model_output_rejected: "Model metni denetimde reddedildi",
 };
 const angles: Record<string, string> = {
   front: "Ön",
@@ -157,7 +158,7 @@ function CarIllustration() {
 export default function App() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [selectedId, setSelectedId] = useState("ILAN-1001");
-  const [dataset, setDataset] = useState<"real" | "demo">("real");
+  const [dataset, setDataset] = useState<"real" | "demo">("demo");
   const [description, setDescription] = useState("");
   const [view, setView] = useState<"workspace" | "tasks" | "history">(
     "workspace",
@@ -419,12 +420,16 @@ export default function App() {
             <strong>
               {mode === "fixture"
                 ? "Anahtarsız demo modu"
-                : "Canlı model: " + mode}
+                : mode === "ollama"
+                  ? "Ücretsiz yerel model: Ollama"
+                  : "Canlı model: " + mode}
             </strong>
             <p>
               {mode === "fixture"
                 ? "Sonuçlar deterministik kurallarla üretilir; canlı LLM çalışmıyor."
-                : "Canlı model açıklama üretir; aksiyon yetkisi backend kurallarıyla yönetilir."}{" "}
+                : mode === "ollama"
+                  ? "Model okuma araçlarını seçer ve bulguları özetler. Satıcı soruları ve mesaj taslağı kurallardan gelir."
+                  : "Canlı model açıklama üretir; aksiyon yetkisi backend kurallarıyla yönetilir."}{" "}
               {selected?.vehicle.source
                 ? "Seçilen kayıt, indirilen gerçek ilanın yerel kopyasıdır. Fotoğraflardan hasar veya açı analizi yapılmıyor."
                 : "Seçilen araç ve görsel bilgileri sentetik örnektir."}
@@ -717,6 +722,12 @@ export default function App() {
                           </span>
                         </div>
                       </div>
+                      {ready.explanation_kind === "local_summary" && (
+                        <p className="metadata-note">
+                          Model özeti anlam hatası içerebilir. Karar verirken aşağıdaki
+                          bulguları ve kaynakları kontrol edin; bu özet görev içeriğine eklenmez.
+                        </p>
+                      )}
                       <p className="review-summary">
                         {ready.narrative.summary}
                       </p>

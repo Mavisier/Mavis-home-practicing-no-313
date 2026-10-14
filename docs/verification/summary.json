@@ -1,6 +1,6 @@
 {
-  "verified_at": "2026-10-13T07:38:42.712245+00:00",
-  "backend_tests_passed": 50,
+  "verified_at": "2026-10-14T10:18:05.950815+00:00",
+  "backend_tests_passed": 81,
   "frontend_lint": "passed",
   "frontend_typecheck": "passed",
   "frontend_build": "passed",
@@ -9,7 +9,6 @@
   "mcp_read_only_tools": 2,
   "parallel_ui_reads_passed": 12,
   "docker_runtime_verified": false,
-  "live_providers_verified": false,
   "python_advisories": 0,
   "frontend_advisories": 0,
   "optional_n8n_platform_audit": {
@@ -22,5 +21,26 @@
   },
   "n8n_note": "External ignored verification runtime; upstream advisories and trigger-header retention disclosed; not production-certified.",
   "credential_rotation": "Two local webhook credentials rotated; generated execution records removed.",
-  "screenshots": "Three synthetic-only screenshots; no credentials or third-party photos."
+  "screenshots": "Synthetic fixture GIF and existing synthetic screenshots; no third-party photos.",
+  "prior_verification_at": "2026-10-13T07:38:42.712245+00:00",
+  "local_ollama_verified": true,
+  "remote_providers_verified": false,
+  "local_model_structured_results": {
+    "valid": 30,
+    "total": 30,
+    "generated_summaries": 20,
+    "approved_empty_wording_after_model_plan": 10,
+    "semantic_accuracy": "Not established; observed errors documented"
+  },
+  "rule_diagnostic": {
+    "expected_label_matches": 27,
+    "total": 30,
+    "remaining_deviations": 3,
+    "baseline_matches": 21
+  },
+  "local_launcher": "Windows with existing prerequisites; setup/start/owned shutdown exercised",
+  "docker_status": "Signed installer downloaded; per-user install failed; WSL/VirtualMachinePlatform disabled and elevation unavailable.",
+  "prior_integration_checks_not_repeated": true,
+  "dependency_audit_date": "2026-10-13; not re-audited in this change",
+  "local_model_ui_check": "Synthetic ILAN-1001, Ollama/neural, HTTP/UI result reached pending approval with two findings and three sources; no approval in this check."
 }

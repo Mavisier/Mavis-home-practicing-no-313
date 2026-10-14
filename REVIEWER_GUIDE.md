@@ -6,7 +6,7 @@ the status table separates local verification, unverified live paths and future 
 ## Five-minute review
 
 1. Read the README overview, architecture and limitations.
-2. Follow Local setup; run the synthetic demo without API keys.
+2. Run `python tools/start_demo.py --setup`; see docs/LOCAL_SETUP.md for prerequisites.
 3. Open the UI and select Kurgusal demo örnekleri → Beyan çelişkisi.
 4. Run review and expand a retrieved source.
 5. Inspect the finding and unsent seller-message draft.
@@ -26,7 +26,7 @@ local trial used public listings/photos; raw downloads are not published.
   immutable proposal and event log.
 - backend/app/api/reviews.py — ownership, approval authority, payload/current-record
   checks, transactions, idempotency and safe sample-file serving.
-- backend/app/services/providers.py and knowledge.py — fixture/live split,
+- backend/app/services/providers.py, local_model.py and knowledge.py — fixture/live split,
   allowlisted planning, atomic ingestion and embedding-space isolation.
 - backend/app/schemas.py — input/output contracts and limits.
 - backend/tests — safety, provider failures, retrieval, n8n graph and MCP contracts.
@@ -35,13 +35,17 @@ local trial used public listings/photos; raw downloads are not published.
 
 ## Evidence
 
-50 backend tests and six deterministic evaluation cases were locally verified.
+81 backend tests and six deterministic evaluation cases were locally verified on 2026-10-14.
 Frontend lint/typecheck/build passed. n8n import and eight flow checks passed;
 MCP stdio initialization and both tools were exercised. Verification summaries
 are in docs/verification. Core dependency audits found no known advisories at the
 audit date.
 
-Docker/native PostgreSQL and live LLM/neural embeddings were not verified. The
+Actual local Ollama planning/summaries and neural embeddings were exercised on 30 synthetic cases.
+See docs/verification/LOCAL_MODEL_REVIEW.md for raw evidence and semantic errors.
+Twenty cases used generated summaries; ten empty results used approved wording
+after real model planning. Seller drafts/questions are backend-generated.
+Docker/native PostgreSQL and OpenAI/Anthropic were not verified. The
 optional n8n npm runtime has upstream dependency/retention limitations and is
 excluded from the repository. Read SECURITY.md before treating a demo as a
 deployment starting point. Passing fixture tests does not prove AI accuracy,
@@ -50,7 +54,7 @@ production scale or business impact.
 ## AI review prompt
 
 Review this extracted project. Start with README.md and REVIEWER_GUIDE.md. Distinguish
-verified fixture behavior from unverified live paths and planned work. Inspect tool
+verified fixture behavior and actual local-model evidence from unverified paths and planned work. Read the published semantic failures; schema validity is not accuracy. Inspect tool
 allowlists, retrieval attribution, bounded schemas, approval authority, ownership,
 payload/current-record checks, idempotency, error handling and tests. Use fixture
 mode only; do not enable paid calls, fetch public listings, publish or message users.
@@ -68,3 +72,10 @@ Describe the project as an AI-assisted portfolio prototype. Be ready to explain
 why the backend controls authority, where the human gate is, what the tests prove
 and how company-specific data/policies would enter a measured pilot. Do not claim
 years of experience, customers, deployment or measured business impact from this demo.
+
+## Free local-model review
+
+Optional: keep Ollama running, download qwen2.5:7b and nomic-embed-text:v1.5, stop
+the fixture demo, and use `python tools/start_demo.py --provider ollama --neural`.
+The standard review prompt above keeps fixture mode unless the reviewer explicitly
+chooses this keyless path. Never enable paid calls automatically.

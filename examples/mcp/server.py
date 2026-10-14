@@ -58,6 +58,7 @@ def get_listing_analysis(run_id: str) -> dict:
         "run_id": run["id"],
         "status": run["status"],
         "mode": result.get("mode"),
+        "explanation_kind": result.get("explanation_kind"),
         "verdict": result.get("verdict"),
         "findings": result.get("findings", []),
         "sources": result.get("sources", []),

@@ -13,7 +13,7 @@ portfolio repository, not a certified production deployment.
 - [x] Fixture workflow works without external API keys.
 - [x] Missing/failed live providers fail safely without fixture fallback.
 - [x] Automated tests block external HTTP calls.
-- [x] Backend tests pass (50 including the optional MCP group).
+- [x] Backend tests pass (81 including the optional MCP group).
 - [x] Python lint passes.
 - [x] Frontend lint passes.
 - [x] TypeScript check passes.
@@ -25,7 +25,7 @@ portfolio repository, not a certified production deployment.
 - [x] n8n flow was imported and locally tested; platform audit/retention limits documented.
 - [x] Two read-only MCP tools and stdio protocol tested.
 - [x] README claims separate verified, unverified and planned behavior.
-- [x] Docker status is explicit: static review only; runtime unavailable.
+- [x] Docker status is explicit: static review only; installation blocked on administrator-enabled WSL; no runtime check.
 - [x] Core dependency audit results recorded; optional n8n advisories disclosed.
 - [x] MIT license and security policy included.
 - [x] Final staged file list, whitespace and secret scan reviewed.
@@ -63,3 +63,14 @@ npm run build
 Do not use git add -f for ignored files. Inspect staged paths before creating the
 commit. See GITHUB_METADATA.md for source-repository publication status. No public
 application deployment is claimed.
+
+## 2026-10-14 additions
+
+- [x] Actual keyless Ollama runs preserved, including semantic failures and prior iterations.
+- [x] Structured-output counts distinguished from model accuracy.
+- [x] Synthetic rule diagnostic preserves three remaining deviations.
+- [x] Demo GIF contains only synthetic records; captured fixture mode is labeled.
+- [x] One-terminal launcher exercised with existing Windows prerequisites.
+- [x] Local-model summaries excluded from task arguments; backend drafts retained.
+- [x] REAL-* archive guard blocks non-fixture generation or embedding.
+- [ ] Docker/native PostgreSQL build, readiness and concurrency verified.

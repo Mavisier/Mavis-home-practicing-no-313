@@ -15,6 +15,7 @@ from app.services.providers import (
     SYSTEM_PROMPT,
     TOOL_NAMES,
     ProviderConfigurationError,
+    ProviderOutputError,
     get_provider,
 )
 from app.services.vehicle_checks import check_vehicle
@@ -65,7 +66,7 @@ def process_review(body: ReviewCreate, requester: str):
             status="processing",
             provider=get_settings().llm_provider,
             model=get_settings().llm_model or "fixture-rules-v1",
-            prompt_version="vehicle-review-v1",
+            prompt_version="vehicle-review-v3",
         )
         session.add(run)
         session.flush()
@@ -78,6 +79,13 @@ def process_review(body: ReviewCreate, requester: str):
         )
     events = []
     try:
+        settings = get_settings()
+        if body.listing_id.startswith("REAL-") and (
+            settings.llm_provider != "fixture" or settings.embedding_provider != "fixture"
+        ):
+            raise ProviderConfigurationError(
+                "Archived third-party listing samples are restricted to fixture-only review."
+            )
         provider = get_provider()
         events.append(("prompt", {"system": SYSTEM_PROMPT, "request": body.model_dump()}))
         calls = provider.plan(body.listing_id, body.workflow, body.request_text)
@@ -115,6 +123,13 @@ def process_review(body: ReviewCreate, requester: str):
             "findings": findings,
             "sources": sources,
         }
+        if get_settings().llm_provider == "ollama":
+            used_source_ids = {finding["source_id"] for finding in findings}
+            context = {
+                "workflow": body.workflow,
+                "findings": findings,
+                "sources": [source for source in sources if source["id"] in used_source_ids],
+            }
         events.append(
             ("prompt", {"system": SYSTEM_PROMPT, "context": context, "stage": "explanation"})
         )
@@ -135,6 +150,15 @@ def process_review(body: ReviewCreate, requester: str):
             "sources": sources,
             "mode": get_settings().llm_provider,
             "embedding_space": space,
+            "explanation_kind": (
+                "fixture"
+                if get_settings().llm_provider == "fixture"
+                else "approved_empty"
+                if get_settings().llm_provider == "ollama" and not findings
+                else "local_summary"
+                if get_settings().llm_provider == "ollama"
+                else "remote_narrative"
+            ),
             "latency_ms": round((perf_counter() - started) * 1000),
             "limitations": [
                 "Fotoğraflardan hasar veya açı çıkarımı yapılmadı.",
@@ -184,7 +208,7 @@ def process_review(body: ReviewCreate, requester: str):
             run.finished_at = datetime.now(timezone.utc)
             run.final_response_json = {
                 "error": str(error)
-                if isinstance(error, ProviderConfigurationError)
+                if isinstance(error, (ProviderConfigurationError, ProviderOutputError))
                 else "Kontrol tamamlanamadı. Model ayarlarını ve bilgi indeksini kontrol edin.",
                 "mode": get_settings().llm_provider,
             }
@@ -194,4 +218,11 @@ def process_review(body: ReviewCreate, requester: str):
                 "workflow_failed",
                 {"message": "Kontrol güvenli şekilde durduruldu; aksiyon uygulanmadı."},
             )
+            if isinstance(error, ProviderOutputError):
+                append_event(
+                    session,
+                    run_id,
+                    "model_output_rejected",
+                    {"reason": str(error), "candidate": error.candidate},
+                )
     return run_id
