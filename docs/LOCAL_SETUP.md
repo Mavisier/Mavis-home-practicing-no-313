@@ -90,22 +90,26 @@ Docker packages the database, backend and frontend into containers with their ow
 runtimes. Compose describes how to build/start them together, avoiding manual
 installation of each app dependency. It needs a working Docker engine.
 
-On this Windows host a valid Docker Inc signed installer was downloaded on
-2026-10-14. Per-user installation failed because Virtual Machine Platform and WSL
-were disabled. Elevation produced no usable consent window in the agent session.
-No features were enabled and no reboot was forced. No container build/start is claimed.
+On 2026-10-14, a valid Docker Inc signed Desktop 4.95.0 installer completed
+per-user installation after Virtual Machine Platform was enabled and the user
+restarted Windows. Docker CLI 29.8.2 and Compose 5.6.0 are installed. The actual
+`docker compose config --quiet` check passed using the ignored synthetic demo
+configuration. This verifies configuration parsing only, not container runtime.
 
-Open PowerShell **as Administrator** and follow
-[Microsoft's instructions](https://learn.microsoft.com/en-us/windows/wsl/install):
+The engine could not start: Windows reported virtualization unavailable despite
+Virtual Machine Platform being Enabled and the hypervisor being detected. The
+`vmcompute`/`hns` services and `vmcompute.exe` were absent. An elevated check
+confirmed the state. Microsoft-Hyper-V-Services was enabled with dependencies and
+`-NoRestart`; Windows returned `RestartNeeded=true`. No automatic reboot occurred.
+Runtime/native PostgreSQL checks remain unverified until a later restart and
+successful engine launch. These observations do not prove the root cause is resolved.
+See [bounded status report](verification/docker.json).
 
-```powershell
-wsl --install --no-distribution --web-download
-```
-
-Restart if Windows requests it, then install Docker Desktop per its
-[Windows instructions](https://docs.docker.com/desktop/setup/install/windows-install/).
-Check Docker's current terms for your use case. Once the engine is ready, copy
-`.env.example` to `.env` if needed, stop the native launcher, and try:
+For a different Windows machine, follow the official
+[Docker installation instructions](https://docs.docker.com/desktop/setup/install/windows-install/)
+and [WSL setup](https://learn.microsoft.com/en-us/windows/wsl/install).
+Check current license terms for your use case. After the engine is ready, copy
+`.env.example` to `.env` if absent and stop the native launcher to release ports:
 
 ```powershell
 docker compose up --build -d
@@ -117,3 +121,17 @@ the verified local-model path is the native launcher. Validate container readine
 approvals and concurrency before marking Docker verified. OpenAI/Anthropic remain
 implemented but unverified; this free demo does not enable them. Optional setup:
 [n8n](../n8n/README.md), [MCP](../examples/mcp/README.md).
+
+For validation without forwarding your ordinary `.env` (which may contain provider
+keys), use an ignored copy of the synthetic defaults. Compose's `DEMO_ENV_FILE`
+selects the backend/migration env file; `--env-file` selects interpolation values:
+
+```powershell
+Copy-Item .env.example .local/docker-verification.env
+$env:DEMO_ENV_FILE = '.local/docker-verification.env'
+docker compose --env-file .local/docker-verification.env config --quiet
+docker compose --env-file .local/docker-verification.env up --build -d
+```
+
+The default remains `.env`. Never print expanded configuration with real secrets
+or commit local env files. Clearing `DEMO_ENV_FILE` restores the normal file.

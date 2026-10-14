@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-10-14T10:51:11.809791+00:00",
+  "desktop_version": "4.95.0",
+  "installer_signature": "Valid; Docker Inc",
+  "per_user_install_exit": 0,
+  "cli_version": "29.8.2",
+  "compose_version": "5.6.0",
+  "compose_config_validation": "passed with ignored synthetic demo env; no provider keys",
+  "engine_ready": false,
+  "container_build_verified": false,
+  "native_postgresql_verified": false,
+  "observations": {
+    "virtual_machine_platform": "Enabled",
+    "hypervisor_detected": true,
+    "firmware_virtualization_enabled": true,
+    "host_compute_services": "vmcompute and hns absent",
+    "vmcompute_executable": "absent"
+  },
+  "repair": {
+    "feature": "Microsoft-Hyper-V-Services with dependencies",
+    "feature_enable_completed": true,
+    "restart_needed": true,
+    "automatic_restart_performed": false
+  },
+  "interpretation": "Installer/configuration evidence only. Root-cause resolution and container runtime must be checked after restart."
+}

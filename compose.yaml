@@ -19,7 +19,7 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
-    env_file: .env
+    env_file: ${DEMO_ENV_FILE:-.env}
     command: ["python", "-m", "scripts.bootstrap"]
     environment:
       DATABASE_URL: postgresql+psycopg://workflow:workflow@db:5432/workflow
@@ -31,7 +31,7 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
-    env_file: .env
+    env_file: ${DEMO_ENV_FILE:-.env}
     environment:
       DATABASE_URL: postgresql+psycopg://workflow:workflow@db:5432/workflow
       DEMO_REQUESTER_TOKEN: ${DEMO_REQUESTER_TOKEN:?Copy .env.example to .env first}

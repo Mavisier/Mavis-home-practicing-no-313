@@ -77,9 +77,10 @@ Optional n8n orchestrates separate review and human-decision webhooks; MCP expos
 two read-only tools. Details: [architecture](docs/ARCHITECTURE.md).
 
 Docker Compose describes a native PostgreSQL deployment, but its runtime is
-**unverified**: this Windows host needs administrator-enabled WSL/Virtual Machine
-Platform. A signed installer was downloaded; installation did not complete.
-The one-command local demo works independently of Docker.
+**unverified**: Docker Desktop 4.95.0 is installed and `docker compose config`
+validated the configuration. The engine is blocked by missing Windows Host Compute
+services; the services feature was enabled and Windows reports a restart is needed.
+No container build/start is claimed. The native demo works independently of Docker.
 
 ## Review and boundaries
 

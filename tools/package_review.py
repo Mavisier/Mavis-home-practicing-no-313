@@ -67,6 +67,7 @@ EXTRA_FILES = {
     "docs/demo/capture.json",
     "docs/verification/LOCAL_MODEL_REVIEW.md",
     "docs/verification/local-model.json",
+    "docs/verification/docker.json",
     "docs/verification/local-model-baseline.json",
     "docs/verification/local-model-v2.json",
     "docs/verification/rule-robustness-baseline.json",

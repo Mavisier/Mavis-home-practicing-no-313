@@ -25,7 +25,7 @@ portfolio repository, not a certified production deployment.
 - [x] n8n flow was imported and locally tested; platform audit/retention limits documented.
 - [x] Two read-only MCP tools and stdio protocol tested.
 - [x] README claims separate verified, unverified and planned behavior.
-- [x] Docker status is explicit: static review only; installation blocked on administrator-enabled WSL; no runtime check.
+- [x] Docker status is explicit: Desktop installed and Compose parsing verified; engine blocked on Windows Host Compute services pending restart; no runtime check.
 - [x] Core dependency audit results recorded; optional n8n advisories disclosed.
 - [x] MIT license and security policy included.
 - [x] Final staged file list, whitespace and secret scan reviewed.
