@@ -10,10 +10,17 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import delete, select
 
-from app.config import get_settings
+from app.config import PROJECT_ROOT, get_settings
 from app.db import SessionLocal
 from app.main import app
 from app.models import Action, ReviewTask, Run, RunEvent
+
+
+def pytest_configure(config):
+    if config.option.basetemp is None:
+        directory = PROJECT_ROOT / ".tmp" / "pytest"
+        directory.parent.mkdir(parents=True, exist_ok=True)
+        config.option.basetemp = str(directory)
 
 
 @pytest.fixture(autouse=True)
