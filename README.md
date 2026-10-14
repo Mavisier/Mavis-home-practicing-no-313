@@ -42,16 +42,19 @@ python tools/start_demo.py --provider ollama --neural
 Keep Ollama running and stop the previous demo first. Downloads require several GB;
 local inference consumes your hardware and electricity. See [setup](docs/LOCAL_SETUP.md).
 
+[![Docker Compose verification](https://github.com/Mavisier/Mavis-home-practicing-no-313/actions/workflows/compose-check.yml/badge.svg)](https://github.com/Mavisier/Mavis-home-practicing-no-313/actions/workflows/compose-check.yml)
+
 ## What is verified
 
 | Evidence | Result and scope |
 | --- | --- |
 | Backend and fixture checks | 81 tests, 6/6 workflow evaluations; PGlite/pgvector locally |
 | Frontend | Lint, TypeScript check and production build passed |
+| Docker / native PostgreSQL | Linux CI built/started Compose; 81 tests + 6/6 evals; 8 concurrent approvals produced one task and one execution event |
 | Actual Ollama workflow | qwen2.5:7b + 768-dimensional nomic embeddings; 30/30 valid structured results, no task before approval |
 | Turkish rule diagnostic | 27/30 expected-label matches after suffix fixes; three known deviations remain |
 | Optional integrations | Previously verified n8n import + 8 flow checks; MCP stdio + 2 read-only tools |
-| Implemented, unverified | OpenAI/Anthropic generation, OpenAI embeddings, Docker/native PostgreSQL runtime |
+| Implemented, unverified | OpenAI/Anthropic generation, OpenAI embeddings; this host’s Windows Docker runtime |
 
 **Valid JSON is not correct reasoning.** Local summaries included unsupported
 execution wording and reversed missing-field meanings. The model selects bounded
@@ -76,11 +79,17 @@ semantic retrieval benchmark. Image damage/OCR analysis is not implemented.
 Optional n8n orchestrates separate review and human-decision webhooks; MCP exposes
 two read-only tools. Details: [architecture](docs/ARCHITECTURE.md).
 
-Docker Compose describes a native PostgreSQL deployment, but its runtime is
-**unverified**: Docker Desktop 4.95.0 is installed and `docker compose config`
-validated the configuration. The engine is blocked by this host’s Windows services.
-Component-store repair completed; Windows reports a pending repair requiring restart.
-No container build/start is claimed. The native demo works independently of Docker.
+Docker Compose was **built and run on a GitHub-hosted Ubuntu 24.04 runner**,
+with native PostgreSQL 17.11/pgvector, FastAPI and the production Nginx frontend.
+[Passing run](https://github.com/Mavisier/Mavis-home-practicing-no-313/actions/runs/38612421807)
+and [saved evidence](docs/verification/compose-ci.json) include the eight-request
+idempotency check. CI uses synthetic data and fixture mode, not live model calls.
+This is a small functional concurrency check, not production load/scale proof.
+
+This Windows host's Docker Desktop is installed but its engine remains blocked
+by unapplied Windows servicing operations despite actual restarts. Linux evidence
+does not establish Windows readiness. The native local demo remains available.
+[Setup and CI reproduction](docs/LOCAL_SETUP.md).
 
 ## Review and boundaries
 

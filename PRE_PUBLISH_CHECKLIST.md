@@ -25,7 +25,7 @@ portfolio repository, not a certified production deployment.
 - [x] n8n flow was imported and locally tested; platform audit/retention limits documented.
 - [x] Two read-only MCP tools and stdio protocol tested.
 - [x] README claims separate verified, unverified and planned behavior.
-- [x] Docker status is explicit: Desktop installed and Compose parsing verified; engine blocked on host services; DISM health repaired, SFC blocked on Windows pending repair restart; no runtime check.
+- [x] Docker status is explicit: Linux CI runtime passed; local Windows engine remains blocked on unapplied servicing operations.
 - [x] Core dependency audit results recorded; optional n8n advisories disclosed.
 - [x] MIT license and security policy included.
 - [x] Final staged file list, whitespace and secret scan reviewed.
@@ -73,4 +73,5 @@ application deployment is claimed.
 - [x] One-terminal launcher exercised with existing Windows prerequisites.
 - [x] Local-model summaries excluded from task arguments; backend drafts retained.
 - [x] REAL-* archive guard blocks non-fixture generation or embedding.
-- [ ] Docker/native PostgreSQL build, readiness and concurrency verified.
+- [x] Docker/native PostgreSQL build, readiness and eight-request concurrency verified on Linux CI.
+- [ ] This Windows host’s Docker engine verified.

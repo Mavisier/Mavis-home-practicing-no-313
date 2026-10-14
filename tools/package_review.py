@@ -70,6 +70,7 @@ EXTRA_FILES = {
     "docs/verification/LOCAL_MODEL_REVIEW.md",
     "docs/verification/local-model.json",
     "docs/verification/docker.json",
+    "docs/verification/compose-ci.json",
     "docs/verification/local-model-baseline.json",
     "docs/verification/local-model-v2.json",
     "docs/verification/rule-robustness-baseline.json",
@@ -136,7 +137,7 @@ def package():
         "limits": [
             "Local model semantic errors documented; remote providers unverified",
             "External n8n platform audit/retention limitations",
-            "No Docker runtime verification",
+            "Linux fixture Compose verified; local Windows engine remains blocked",
         ],
         "files": [
             {

@@ -84,30 +84,34 @@ It runs `process_review` on 30 temporary synthetic records, writes ignored
 It does not test HTTP transport, native concurrency, real approval identities or
 domain-expert semantic accuracy. Review failed/incorrect outputs before publishing.
 
-## Docker target — runtime unverified
+## Docker Compose — verified on Linux CI
 
-Docker packages the database, backend and frontend into containers with their own
-runtimes. Compose describes how to build/start them together, avoiding manual
-installation of each app dependency. It needs a working Docker engine.
+Docker packages the database, backend and frontend into containers. Compose builds
+and starts them together. It needs a working local Docker engine.
 
-On 2026-10-14, a valid Docker Inc signed Desktop 4.95.0 installer completed
-per-user installation after Virtual Machine Platform was enabled and the user
-restarted Windows. Docker CLI 29.8.2 and Compose 5.6.0 are installed. The actual
-`docker compose config --quiet` check passed using the ignored synthetic demo
-configuration. This verifies configuration parsing only, not container runtime.
+On 2026-10-14, the same Compose configuration was built and started on a standard
+GitHub-hosted Ubuntu 24.04 runner with native PostgreSQL 17.11/pgvector. All 81
+backend tests, six fixture evaluations and the HTTP concurrency smoke check passed.
+Eight simultaneous approvals created one task and one execution event. The Nginx
+frontend/proxy, requester/reviewer gates and rejection were checked over HTTP.
+This is fixture/synthetic evidence, not live-model, load/scale or real identity proof.
+[Passing run](https://github.com/Mavisier/Mavis-home-practicing-no-313/actions/runs/38612421807)
+· [saved report](verification/compose-ci.json)
 
-The engine could not start: Windows reported virtualization unavailable despite
-Virtual Machine Platform being Enabled and the hypervisor being detected. The
-`vmcompute`/`hns` services and `vmcompute.exe` were absent. An elevated check
-confirmed the state. Microsoft-Hyper-V-Services was enabled with dependencies and
-`-NoRestart`; Windows returned `RestartNeeded=true`. No automatic reboot occurred.
-After the user restarted again, the services/executable remained absent despite
-Enabled feature states. An elevated health check reported Repairable. DISM
-RestoreHealth completed successfully with Healthy status and no automatic reboot.
-A subsequent SFC scan exited with code 1 before scanning: Windows reported a
-pending system repair that requires restart. Runtime/native PostgreSQL remain
-unverified. Health repair does not prove the Docker root cause is resolved.
-See [bounded status report](verification/docker.json).
+The workflow `.github/workflows/compose-check.yml` runs on relevant main-branch
+pushes or manual Actions dispatch. It builds the existing Dockerfiles, runs locked
+Python dependencies with the optional MCP group and saves a seven-day artifact.
+It uses dummy demo credentials and no repository/provider secrets. Standard hosted
+runners are free for public repositories per
+[GitHub's documentation](https://docs.github.com/en/actions/how-tos/write-workflows/choose-where-workflows-run/choose-the-runner-for-a-job).
+
+The local Windows host is a separate unresolved issue. Docker Desktop 4.95.0 was
+installed and Compose 5.6.0 parsing passed. Windows feature flags are Enabled but
+Host Compute services/executable remain absent. DISM repaired the component store
+from Repairable to Healthy. Actual restarts did not apply the pending Windows
+installation queue; SFC still refuses to start due to a pending system repair.
+No pending files or boot registry values were edited manually. This Linux run does
+not prove this Windows engine is ready. [Local status](verification/docker.json)
 
 For a different Windows machine, follow the official
 [Docker installation instructions](https://docs.docker.com/desktop/setup/install/windows-install/)
@@ -121,8 +125,8 @@ docker compose down
 ```
 
 Compose overrides the database URL for native PostgreSQL. It does not start Ollama;
-the verified local-model path is the native launcher. Validate container readiness,
-approvals and concurrency before marking Docker verified. OpenAI/Anthropic remain
+the verified local-model path is the native launcher. The CI validates container
+readiness, approvals and small concurrency in fixture mode on Linux. OpenAI/Anthropic remain
 implemented but unverified; this free demo does not enable them. Optional setup:
 [n8n](../n8n/README.md), [MCP](../examples/mcp/README.md).
 
@@ -139,3 +143,20 @@ docker compose --env-file .local/docker-verification.env up --build -d
 
 The default remains `.env`. Never print expanded configuration with real secrets
 or commit local env files. Clearing `DEMO_ENV_FILE` restores the normal file.
+
+After Compose is ready, reproduce the additional check with the host backend venv.
+Set `DATABASE_URL` to the native Compose socket on port 5433 and fixture providers;
+use the same requester/reviewer values as the selected demo env file. The CI's
+verification env uses an eight-connection pool. Then run:
+
+```powershell
+$env:DATABASE_URL = 'postgresql+psycopg://workflow:workflow@127.0.0.1:5433/workflow'
+$env:LLM_PROVIDER = 'fixture'
+$env:EMBEDDING_PROVIDER = 'fixture'
+backend/.venv/Scripts/python.exe tools/smoke_compose.py
+```
+
+The script checks the local fixture configuration before creating a temporary
+synthetic record, tests eight parallel approvals and removes its own records.
+It writes ignored `.local/compose-verification.json`. Do not run it against a real
+operational database. In Linux, use `backend/.venv/bin/python`.

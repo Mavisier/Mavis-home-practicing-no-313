@@ -45,7 +45,10 @@ Actual local Ollama planning/summaries and neural embeddings were exercised on 3
 See docs/verification/LOCAL_MODEL_REVIEW.md for raw evidence and semantic errors.
 Twenty cases used generated summaries; ten empty results used approved wording
 after real model planning. Seller drafts/questions are backend-generated.
-Docker/native PostgreSQL and OpenAI/Anthropic were not verified. The
+Docker Compose/native PostgreSQL passed on Linux CI: 81 tests, six fixture cases,
+and eight concurrent approvals producing one task/execution event. See
+docs/verification/compose-ci.json and the linked public run. Windows Docker
+readiness and OpenAI/Anthropic remain unverified. The
 optional n8n npm runtime has upstream dependency/retention limitations and is
 excluded from the repository. Read SECURITY.md before treating a demo as a
 deployment starting point. Passing fixture tests does not prove AI accuracy,

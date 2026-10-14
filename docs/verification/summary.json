@@ -8,7 +8,7 @@
   "n8n_flow_checks": 8,
   "mcp_read_only_tools": 2,
   "parallel_ui_reads_passed": 12,
-  "docker_runtime_verified": false,
+  "docker_runtime_verified": true,
   "python_advisories": 0,
   "frontend_advisories": 0,
   "optional_n8n_platform_audit": {
@@ -39,9 +39,12 @@
     "baseline_matches": 21
   },
   "local_launcher": "Windows with existing prerequisites; setup/start/owned shutdown exercised",
-  "docker_status": "Desktop installed and Compose parsing verified. After restart host compute services remain absent. DISM repaired component store to Healthy; SFC blocked by Windows pending system repair requiring reboot. Runtime not verified.",
+  "docker_status": "Linux Compose/native PostgreSQL passed 81 tests, six evals, eight parallel approvals yielding one task/execution event. Windows servicing queue remains unapplied after reboot.",
   "prior_integration_checks_not_repeated": true,
   "dependency_audit_date": "2026-10-13; not re-audited in this change",
   "local_model_ui_check": "Synthetic ILAN-1001, Ollama/neural, HTTP/UI result reached pending approval with two findings and three sources; no approval in this check.",
-  "docker_status_updated_at": "2026-10-14T15:26:26.601085+00:00"
+  "docker_status_updated_at": "2026-10-14T18:10:20.433311+00:00",
+  "docker_runtime_environment": "GitHub-hosted Ubuntu 24.04; fixture mode, synthetic data",
+  "windows_docker_runtime_verified": false,
+  "docker_ci_run_url": "https://github.com/Mavisier/Mavis-home-practicing-no-313/actions/runs/38612421807"
 }

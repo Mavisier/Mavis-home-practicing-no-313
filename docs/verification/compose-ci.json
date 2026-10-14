@@ -1,0 +1,24 @@
+{
+  "verified_at": "2026-10-14T18:08:10.898696+00:00",
+  "database": "PostgreSQL 17.11 (Debian 17.11-1.pgdg12+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+  "mode": "fixture; synthetic data; no model-provider calls",
+  "checks": {
+    "backend_readiness": true,
+    "nginx_frontend_and_proxy": true,
+    "requester_auth_required": true,
+    "no_task_before_approval": true,
+    "reviewer_auth_required": true,
+    "rejection_cannot_execute": true,
+    "proxy_explicit_approval": true,
+    "parallel_approval_requests": 8,
+    "parallel_unique_tasks": 1,
+    "parallel_execution_audit_events": 1
+  },
+  "limits": "Small local concurrency check, not load/scale or identity proof.",
+  "ci_run_url": "https://github.com/Mavisier/Mavis-home-practicing-no-313/actions/runs/38612421807",
+  "ci_head_sha": "896f6720d9f8c22d621573fcfeb63788d5123e49",
+  "environment": "GitHub-hosted Ubuntu 24.04; real Docker Compose and native PostgreSQL/pgvector",
+  "backend_tests_passed": 81,
+  "fixture_evaluation_cases_passed": 6,
+  "warning": "One existing unsuppressed Starlette test-transport deprecation warning."
+}

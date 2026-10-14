@@ -81,5 +81,5 @@ workflow checks. Next I would validate retrieval and summaries with domain exper
 on a held-out dataset, and test native PostgreSQL deployment.”
 
 Reproduce with [local setup](../LOCAL_SETUP.md). Raw case outputs are preserved,
-including earlier attempts. Docker/native PostgreSQL and OpenAI/Anthropic remain
-unverified. This evidence makes no customer-impact, real identity or production claim.
+including earlier attempts. Docker/native PostgreSQL were subsequently exercised in fixture mode on Linux CI
+(see compose-ci.json); Windows runtime and OpenAI/Anthropic remain unverified. This evidence makes no customer-impact, real identity or production claim.

@@ -21,7 +21,8 @@ databases, dependencies and real listing/photo archives remain ignored.
 The source repository is the review entry point; no hosted application or job
 application submission is claimed. Actual local Ollama planning/summaries and
 neural embeddings were exercised on 30 synthetic cases, with known semantic errors.
-OpenAI/Anthropic, OpenAI embeddings and Docker/native PostgreSQL remain unverified.
+Docker/native PostgreSQL were exercised in Linux CI. Windows Docker readiness,
+OpenAI/Anthropic and OpenAI embeddings remain unverified.
 Structured results and fixture checks do not establish AI accuracy or business impact.
 
 Private vulnerability reporting is enabled for this public repository. See SECURITY.md

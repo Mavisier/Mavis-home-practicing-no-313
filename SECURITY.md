@@ -62,7 +62,8 @@ No production identity provider, rate limiting, cloud deployment, tenant isolati
 or production observability claim is made. Local Ollama planning/summaries and neural embeddings were exercised, with known
 semantic errors. Generated local summaries are excluded from task arguments;
 questions/drafts are backend-generated. Lexical guards do not establish truth.
-OpenAI/Anthropic, OpenAI embeddings and Docker runtime are unverified. Image damage/OCR analysis is not implemented. Fixture
+OpenAI/Anthropic and OpenAI embeddings remain unverified. Docker/native PostgreSQL
+were exercised in fixture mode on Linux CI; this Windows engine remains blocked. Image damage/OCR analysis is not implemented. Fixture
 evaluation measures contracts and safety behavior, not real-world model quality.
 The heuristic secret scanner is a publication aid, not a security certification.
 
@@ -74,3 +75,13 @@ records are blocked unless both generation and embedding providers are fixture.
 Do not expose the local Ollama server publicly. Model summaries can still invent
 facts; inspect typed findings and sources before approval. Audit logs contain
 request/source/model text and require a retention policy for real deployments.
+
+## CI boundary
+
+The Compose workflow uses a standard GitHub-hosted Linux runner, synthetic fixtures
+and dummy demo credentials. It requests only contents:read, pins actions by commit,
+does not persist checkout credentials and uses no repository/provider secrets.
+It executes tests and local task approvals, not a deployment or real communications.
+The concurrency smoke check creates/removes only its own synthetic record/runs.
+Evidence artifacts expire after seven days; a bounded report and the public run link
+are preserved in docs/verification/compose-ci.json. Passing CI is not a certification.
