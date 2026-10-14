@@ -78,8 +78,8 @@ two read-only tools. Details: [architecture](docs/ARCHITECTURE.md).
 
 Docker Compose describes a native PostgreSQL deployment, but its runtime is
 **unverified**: Docker Desktop 4.95.0 is installed and `docker compose config`
-validated the configuration. The engine is blocked by missing Windows Host Compute
-services; the services feature was enabled and Windows reports a restart is needed.
+validated the configuration. The engine is blocked by this host’s Windows services.
+Component-store repair completed; Windows reports a pending repair requiring restart.
 No container build/start is claimed. The native demo works independently of Docker.
 
 ## Review and boundaries

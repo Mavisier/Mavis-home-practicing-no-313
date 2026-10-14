@@ -39,9 +39,9 @@
     "baseline_matches": 21
   },
   "local_launcher": "Windows with existing prerequisites; setup/start/owned shutdown exercised",
-  "docker_status": "Desktop 4.95.0 installed; Compose 5.6.0 parsing passed. Engine unable to start; missing Host Compute services feature enabled, RestartNeeded=true. Runtime not verified.",
+  "docker_status": "Desktop installed and Compose parsing verified. After restart host compute services remain absent. DISM repaired component store to Healthy; SFC blocked by Windows pending system repair requiring reboot. Runtime not verified.",
   "prior_integration_checks_not_repeated": true,
   "dependency_audit_date": "2026-10-13; not re-audited in this change",
   "local_model_ui_check": "Synthetic ILAN-1001, Ollama/neural, HTTP/UI result reached pending approval with two findings and three sources; no approval in this check.",
-  "docker_status_updated_at": "2026-10-14T10:51:11.809306+00:00"
+  "docker_status_updated_at": "2026-10-14T15:26:26.601085+00:00"
 }

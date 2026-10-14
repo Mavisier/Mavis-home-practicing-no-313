@@ -101,8 +101,12 @@ Virtual Machine Platform being Enabled and the hypervisor being detected. The
 `vmcompute`/`hns` services and `vmcompute.exe` were absent. An elevated check
 confirmed the state. Microsoft-Hyper-V-Services was enabled with dependencies and
 `-NoRestart`; Windows returned `RestartNeeded=true`. No automatic reboot occurred.
-Runtime/native PostgreSQL checks remain unverified until a later restart and
-successful engine launch. These observations do not prove the root cause is resolved.
+After the user restarted again, the services/executable remained absent despite
+Enabled feature states. An elevated health check reported Repairable. DISM
+RestoreHealth completed successfully with Healthy status and no automatic reboot.
+A subsequent SFC scan exited with code 1 before scanning: Windows reported a
+pending system repair that requires restart. Runtime/native PostgreSQL remain
+unverified. Health repair does not prove the Docker root cause is resolved.
 See [bounded status report](verification/docker.json).
 
 For a different Windows machine, follow the official

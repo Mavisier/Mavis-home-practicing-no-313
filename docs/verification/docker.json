@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-14T10:51:11.809791+00:00",
+  "checked_at": "2026-10-14T15:26:26.594699+00:00",
   "desktop_version": "4.95.0",
   "installer_signature": "Valid; Docker Inc",
   "per_user_install_exit": 0,
@@ -14,7 +14,8 @@
     "hypervisor_detected": true,
     "firmware_virtualization_enabled": true,
     "host_compute_services": "vmcompute and hns absent",
-    "vmcompute_executable": "absent"
+    "vmcompute_executable": "absent",
+    "after_user_restart": "Feature states Enabled and hypervisor detected; vmcompute/hns and executable still absent."
   },
   "repair": {
     "feature": "Microsoft-Hyper-V-Services with dependencies",
@@ -22,5 +23,16 @@
     "restart_needed": true,
     "automatic_restart_performed": false
   },
-  "interpretation": "Installer/configuration evidence only. Root-cause resolution and container runtime must be checked after restart."
+  "interpretation": "Docker installer and Compose parsing verified. Runtime/native PostgreSQL remain unverified; Windows pending repair restart blocks further system-file repair and host readiness.",
+  "component_store_repair": {
+    "before": "Repairable",
+    "restore_health": "Completed successfully; Healthy",
+    "restore_report_restart_needed": false,
+    "automatic_restart_performed": false
+  },
+  "system_file_check": {
+    "exit_code": 1,
+    "result": "Scan not started: Windows reports a pending system repair requiring reboot.",
+    "automatic_restart_performed": false
+  }
 }
