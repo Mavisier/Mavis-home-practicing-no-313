@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ILAN-1001", "title": "2020 Renault Clio 1.0 TCe", "scenario": "Beyan çelişkisi",
+    "vehicle": {"brand": "Renault", "model": "Clio", "year": 2020, "km": 84500, "fuel": "Benzin", "gearbox": "Otomatik", "price_try": 985000, "painted_parts": ["Sol ön kapı"], "replaced_parts": [], "damage_record_try": 18000, "city": "İstanbul", "inspection_days_remaining": 120, "spare_key": true},
+    "description": "Hatasız, boyasız, değişensiz. Aile aracımızdır. Tüm bakımları düzenli yapılmıştır.",
+    "photos": [{"angle": "front", "width": 1600, "height": 1200}, {"angle": "rear", "width": 1600, "height": 1200}, {"angle": "side", "width": 1600, "height": 1200}]
+  },
+  {
+    "id": "ILAN-1002", "title": "2019 Volkswagen Golf 1.6 TDI", "scenario": "Eksik bilgi ve fotoğraf",
+    "vehicle": {"brand": "Volkswagen", "model": "Golf", "year": 2019, "km": 112000, "fuel": "Dizel", "gearbox": "Otomatik", "price_try": 1225000, "painted_parts": null, "replaced_parts": [], "damage_record_try": null, "city": "Ankara", "inspection_days_remaining": null, "spare_key": null},
+    "description": "Temiz Golf, bakımlı araç. Detaylı bilgi için arayınız.",
+    "photos": [{"angle": "front", "width": 480, "height": 320}, {"angle": "front", "width": 480, "height": 320}]
+  },
+  {
+    "id": "ILAN-1003", "title": "2021 Toyota Corolla 1.5", "scenario": "Tutarlı ve tamamlanmış",
+    "vehicle": {"brand": "Toyota", "model": "Corolla", "year": 2021, "km": 62000, "fuel": "Benzin", "gearbox": "Otomatik", "price_try": 1390000, "painted_parts": [], "replaced_parts": [], "damage_record_try": 0, "city": "İzmir", "inspection_days_remaining": 180, "spare_key": true},
+    "description": "62.000 km'de, otomatik vites. Beyanıma göre boya ve değişen parça yoktur. Hasar kaydı bulunmamaktadır. Ekspertiz kontrolüne açıktır.",
+    "photos": [{"angle": "front", "width": 1600, "height": 1200}, {"angle": "rear", "width": 1600, "height": 1200}, {"angle": "side", "width": 1600, "height": 1200}, {"angle": "interior", "width": 1600, "height": 1200}, {"angle": "engine", "width": 1600, "height": 1200}]
+  },
+  {
+    "id": "TRINK-2001", "title": "2018 Ford Focus 1.5 TDCi", "scenario": "Ekspertiz öncesi hazırlık",
+    "vehicle": {"brand": "Ford", "model": "Focus", "year": 2018, "km": 145000, "fuel": "Dizel", "gearbox": "Manuel", "price_try": null, "painted_parts": ["Sağ arka kapı"], "replaced_parts": [], "damage_record_try": 12500, "city": "Bursa", "inspection_days_remaining": 12, "spare_key": false},
+    "description": "Trink Sat ön teklifi için araç bilgilerimi doldurdum. Randevu öncesinde hazırlamam gerekenleri kontrol eder misiniz?",
+    "photos": [{"angle": "front", "width": 1600, "height": 1200}, {"angle": "rear", "width": 1600, "height": 1200}, {"angle": "side", "width": 1600, "height": 1200}, {"angle": "interior", "width": 1600, "height": 1200}, {"angle": "engine", "width": 1600, "height": 1200}]
+  }
+]

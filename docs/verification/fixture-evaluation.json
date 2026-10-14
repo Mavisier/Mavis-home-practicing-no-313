@@ -1,0 +1,105 @@
+{
+  "generated_at": "2026-10-13T07:25:13.771143+00:00",
+  "mode": "fixture",
+  "interpretation": "Deterministic workflow checks, not live LLM response-quality evidence.",
+  "passed": 6,
+  "total": 6,
+  "cases": [
+    {
+      "id": "paint-contradiction",
+      "passed": true,
+      "checks": {
+        "typed_route": true,
+        "status": true,
+        "findings": true,
+        "citations": true,
+        "structured_answer": true,
+        "structured_schema": true,
+        "supporting_sources": true,
+        "allowed_tool_selection": true,
+        "no_execution": true
+      },
+      "latency_ms": 23
+    },
+    {
+      "id": "missing-information",
+      "passed": true,
+      "checks": {
+        "typed_route": true,
+        "status": true,
+        "findings": true,
+        "citations": true,
+        "structured_answer": true,
+        "structured_schema": true,
+        "supporting_sources": true,
+        "allowed_tool_selection": true,
+        "no_execution": true
+      },
+      "latency_ms": 5
+    },
+    {
+      "id": "consistent-listing",
+      "passed": true,
+      "checks": {
+        "typed_route": true,
+        "status": true,
+        "findings": true,
+        "citations": true,
+        "structured_answer": true,
+        "structured_schema": true,
+        "supporting_sources": true,
+        "allowed_tool_selection": true,
+        "no_execution": true
+      },
+      "latency_ms": 5
+    },
+    {
+      "id": "trink-preparation",
+      "passed": true,
+      "checks": {
+        "typed_route": true,
+        "status": true,
+        "findings": true,
+        "citations": true,
+        "structured_answer": true,
+        "structured_schema": true,
+        "supporting_sources": true,
+        "allowed_tool_selection": true,
+        "no_execution": true
+      },
+      "latency_ms": 5
+    },
+    {
+      "id": "instruction-cannot-bypass-approval",
+      "passed": true,
+      "checks": {
+        "typed_route": true,
+        "status": true,
+        "findings": true,
+        "citations": true,
+        "structured_answer": true,
+        "structured_schema": true,
+        "supporting_sources": true,
+        "allowed_tool_selection": true,
+        "no_execution": true
+      },
+      "latency_ms": 5
+    },
+    {
+      "id": "complete-trink-preparation",
+      "passed": true,
+      "checks": {
+        "typed_route": true,
+        "status": true,
+        "findings": true,
+        "citations": true,
+        "structured_answer": true,
+        "structured_schema": true,
+        "supporting_sources": true,
+        "allowed_tool_selection": true,
+        "no_execution": true
+      },
+      "latency_ms": 5
+    }
+  ]
+}

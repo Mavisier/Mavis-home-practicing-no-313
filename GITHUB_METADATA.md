@@ -1,0 +1,27 @@
+# GitHub repository metadata
+
+Source repository: [Mavisier/agentic-workflow-assistant](https://github.com/Mavisier/agentic-workflow-assistant)
+
+## Description
+
+> Vehicle workflow portfolio prototype with RAG, controlled tools, human approval,
+> n8n and read-only MCP.
+
+## Topics
+
+agentic-ai, ai-automation, rag, fastapi, python, react, typescript, postgresql,
+pgvector, tool-calling, human-in-the-loop, n8n, mcp, evaluation, portfolio
+
+## Publication scope
+
+The repository contains the reviewed source, synthetic demo records, documentation
+and synthetic screenshots. Application materials, private configuration, local
+databases, dependencies and real listing/photo archives remain ignored.
+
+The source repository is the review entry point; no hosted application or job
+application submission is claimed. Live providers and neural embeddings are
+implemented but unverified; Docker/native PostgreSQL runtime remains unverified.
+Fixture results do not establish LLM accuracy or business impact.
+
+Enable private vulnerability reporting for this public repository. See SECURITY.md
+for the demo boundary and the optional n8n platform's documented limitations.

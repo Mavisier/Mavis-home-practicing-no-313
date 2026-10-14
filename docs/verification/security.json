@@ -1,0 +1,8 @@
+{
+  "git_history_commits_available": 0,
+  "public_text_files_scanned": 94,
+  "public_findings": [],
+  "owned_workspace_text_files_scanned": 0,
+  "local_artifact_findings": [],
+  "boundary": "Installed dependencies and package caches are not project source; use dependency audits separately."
+}

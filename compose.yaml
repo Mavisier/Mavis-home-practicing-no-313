@@ -1,0 +1,58 @@
+name: agentic-workflow-assistant
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_DB: workflow
+      POSTGRES_USER: workflow
+      POSTGRES_PASSWORD: workflow
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - ./.local/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U workflow -d workflow"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+  migrate:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    env_file: .env
+    command: ["python", "-m", "scripts.bootstrap"]
+    environment:
+      DATABASE_URL: postgresql+psycopg://workflow:workflow@db:5432/workflow
+      DEMO_REQUESTER_TOKEN: ${DEMO_REQUESTER_TOKEN:?Copy .env.example to .env first}
+    depends_on:
+      db:
+        condition: service_healthy
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://workflow:workflow@db:5432/workflow
+      DEMO_REQUESTER_TOKEN: ${DEMO_REQUESTER_TOKEN:?Copy .env.example to .env first}
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/ready', timeout=3)"]
+      interval: 5s
+      timeout: 4s
+      retries: 15
+  frontend:
+    build: ./frontend
+    environment:
+      DEMO_REQUESTER_TOKEN: ${DEMO_REQUESTER_TOKEN:?Copy .env.example to .env first}
+      DEMO_APPROVER_TOKEN: ${DEMO_APPROVER_TOKEN:?Set the local demo reviewer token}
+      NGINX_ENVSUBST_FILTER: ^DEMO_.*_TOKEN$$
+    ports:
+      - "127.0.0.1:5173:80"
+    depends_on:
+      backend:
+        condition: service_healthy

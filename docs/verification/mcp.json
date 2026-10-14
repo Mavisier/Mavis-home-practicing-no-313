@@ -1,0 +1,13 @@
+{
+  "verified_at": "2026-10-13T07:25:22.927697+00:00",
+  "transport": "stdio",
+  "tools": [
+    "get_listing_analysis",
+    "get_review_status"
+  ],
+  "checks": {
+    "protocol_initialization": true,
+    "both_read_tools_called": true,
+    "no_action_executed": true
+  }
+}

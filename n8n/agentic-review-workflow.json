@@ -1,0 +1,395 @@
+{
+  "id": "agenticReviewPortfolio",
+  "name": "Agentic vehicle review with explicit human decision",
+  "active": false,
+  "nodes": [
+    {
+      "id": "d5272c2c-7d89-5bc6-9e55-62ca96a08bf2",
+      "name": "Review webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "agentic-review",
+        "responseMode": "responseNode",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "webhookId": "ab766d30-aacd-5f34-bde7-6126187c84af"
+    },
+    {
+      "id": "b1bee666-9987-53b3-ba12-35340d1e1a46",
+      "name": "Decision webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        500
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "agentic-review-decision",
+        "responseMode": "responseNode",
+        "authentication": "headerAuth",
+        "options": {}
+      },
+      "webhookId": "4f44e891-9fcb-5c7c-a6b2-9442f463c957"
+    },
+    {
+      "id": "cdae82a9-155d-5398-9c2c-1fb5350d1360",
+      "name": "Review input valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        470,
+        -40
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "20753bdd-8214-5302-b47f-eee8dc479cd4",
+              "leftValue": "={{ $json.body && typeof $json.body.request_text === 'string' && $json.body.request_text.trim().length >= 3 && $json.body.request_text.length <= 4000 && typeof $json.body.listing_id === 'string' && /^[A-Za-z0-9_-]{1,40}$/.test($json.body.listing_id) && ['listing_review','trink_readiness'].includes($json.body.workflow) && Object.keys($json.body).every(key => ['request_text','listing_id','workflow'].includes(key)) }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "0a73daf7-a96a-5412-999b-04d0e2738c60",
+      "name": "Invalid review",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        700,
+        160
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"error\":\"Expected listing_id, workflow and bounded request_text\"}",
+        "options": {
+          "responseCode": 400
+        }
+      }
+    },
+    {
+      "id": "9a19b01d-2962-5e54-b331-f45e35590fa5",
+      "name": "Call FastAPI review",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        720,
+        -40
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.ASSISTANT_BASE_URL + '/api/reviews' }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Demo-Token",
+              "value": "={{ $env.ASSISTANT_DEMO_REQUESTER_TOKEN }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.body) }}",
+        "options": {
+          "timeout": 55000
+        }
+      }
+    },
+    {
+      "id": "c88b41f9-1b17-59f8-9e54-b62d59145e24",
+      "name": "Human approval required",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        960,
+        -40
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "0436edd3-bce2-57ea-bc99-49975ab8eafa",
+              "leftValue": "={{ Boolean($json.action && $json.action.status === 'pending_approval') }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "d14c47d8-b09c-5f1d-915c-a6b18314adb1",
+      "name": "Await human decision",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1190,
+        -100
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({run_id:$json.id,status:$json.status,requires_approval:true,action_id:$json.action.id,review:$json.final_response_json,decision_path:'/webhook/agentic-review-decision'}) }}",
+        "options": {
+          "responseCode": 200
+        }
+      }
+    },
+    {
+      "id": "a1a27a8f-f21c-57d1-bc81-a083c5e8852b",
+      "name": "Return completed review",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        1190,
+        100
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({run_id:$json.id,status:$json.status,requires_approval:false,review:$json.final_response_json}) }}",
+        "options": {
+          "responseCode": 200
+        }
+      }
+    },
+    {
+      "id": "88f5694c-ff25-5a51-8ae4-f86021615795",
+      "name": "Human decision valid",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        470,
+        470
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "050949b7-d06e-54df-b45f-8dc1a9ac342f",
+              "leftValue": "={{ $json.body && typeof $json.body.action_id === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test($json.body.action_id) && ['approve','reject'].includes($json.body.decision) && Object.keys($json.body).every(key => ['action_id','decision'].includes(key)) }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "b1a06e49-5ab9-5454-b507-9016a51eed1e",
+      "name": "Invalid decision",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        700,
+        670
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\"error\":\"Expected action_id UUID and explicit approve or reject\"}",
+        "options": {
+          "responseCode": 400
+        }
+      }
+    },
+    {
+      "id": "d236e727-64b1-52ec-a9d6-8a2e3e1a4afb",
+      "name": "Apply persisted human decision",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        720,
+        470
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.ASSISTANT_BASE_URL + '/api/actions/' + $json.body.action_id + '/' + $json.body.decision }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Demo-Token",
+              "value": "={{ $env.ASSISTANT_DEMO_REQUESTER_TOKEN }}"
+            },
+            {
+              "name": "X-Demo-Approver-Token",
+              "value": "={{ $env.ASSISTANT_DEMO_APPROVER_TOKEN }}"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 15000
+        }
+      }
+    },
+    {
+      "id": "391ce6d7-825e-5ff4-ae45-cc4b6d94d43f",
+      "name": "Return persisted final status",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        960,
+        470
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({action_id:$json.id,status:$json.status,result:$json.result_json}) }}",
+        "options": {
+          "responseCode": 200
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Review webhook": {
+      "main": [
+        [
+          {
+            "node": "Review input valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Review input valid": {
+      "main": [
+        [
+          {
+            "node": "Call FastAPI review",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Invalid review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call FastAPI review": {
+      "main": [
+        [
+          {
+            "node": "Human approval required",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Human approval required": {
+      "main": [
+        [
+          {
+            "node": "Await human decision",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Return completed review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Decision webhook": {
+      "main": [
+        [
+          {
+            "node": "Human decision valid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Human decision valid": {
+      "main": [
+        [
+          {
+            "node": "Apply persisted human decision",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Invalid decision",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apply persisted human decision": {
+      "main": [
+        [
+          {
+            "node": "Return persisted final status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataErrorExecution": "none",
+    "saveDataSuccessExecution": "none",
+    "saveManualExecutions": false,
+    "saveExecutionProgress": false
+  },
+  "pinData": {},
+  "tags": []
+}

@@ -1,0 +1,11 @@
+.env
+.tmp
+.local
+**/.venv
+**/node_modules
+**/dist
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache
+docs/screenshots
+data/real_listings

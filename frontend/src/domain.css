@@ -1,0 +1,690 @@
+.vehicle-app .sidebar .nav-item {
+  border: 0;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  color: #a6bac4;
+  font-size: 12px;
+}
+.vehicle-app .sidebar .nav-item.active {
+  background: #ffffff0d;
+  color: #fff;
+}
+.queue-count {
+  margin-left: auto;
+  font-size: 10px;
+  color: #a8bbc4;
+}
+.vehicle-app .main {
+  align-self: start;
+  margin-top: 0;
+}
+.vehicle-app h1 {
+  font-size: 31px;
+}
+.mobile-break {
+  display: none;
+}
+.domain-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #e6dccf;
+  background: #faf5ee;
+  border-radius: 8px;
+  padding: 13px 16px;
+  margin-top: 23px;
+}
+.domain-banner > svg {
+  color: #a4875a;
+  flex-shrink: 0;
+}
+.domain-banner strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+.domain-banner p {
+  margin: 5px 0 0;
+  font-size: 11px;
+  color: #92816b;
+  line-height: 1.7;
+}
+.domain-banner > span {
+  margin-left: auto;
+  white-space: nowrap;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #a5937c;
+}
+.scenario-section {
+  margin-top: 27px;
+}
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.scenario-card {
+  position: relative;
+  text-align: left;
+  border: 1px solid #e1e7eb;
+  background: white;
+  border-radius: 8px;
+  padding: 16px 12px;
+  min-width: 0;
+  transition: border-color 0.15s;
+}
+.scenario-card.selected {
+  border-color: #d99873;
+  background: #fffaf7;
+}
+.scenario-number {
+  display: block;
+  font-size: 9px;
+  color: #a8b2b9;
+  margin-bottom: 9px;
+}
+.selected .scenario-number {
+  color: #cc825c;
+}
+.scenario-card strong {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+}
+.scenario-card small {
+  display: block;
+  font-size: 9px;
+  color: #96a1a9;
+  margin-top: 6px;
+}
+.scenario-card > svg {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  color: #aebac1;
+}
+.domain-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: 21px;
+  margin-top: 23px;
+  align-items: start;
+}
+.vehicle-column {
+  min-width: 0;
+}
+.vehicle-record .panel-title,
+.review-panel .panel-title {
+  font-size: 12px;
+  color: #718995;
+}
+.vehicle-art {
+  position: relative;
+  background: linear-gradient(130deg, #ecf1ed, #f5f7f3);
+  padding: 35px 20px 18px;
+}
+.vehicle-art > span {
+  position: absolute;
+  left: 20px;
+  top: 14px;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  color: #91a59a;
+}
+.car-illustration {
+  width: 100%;
+  display: block;
+}
+.vehicle-body {
+  padding: 21px;
+}
+.vehicle-location {
+  margin: 0 0 9px;
+  color: #99a7ae;
+  font-size: 10px;
+}
+.vehicle-body > h2 {
+  font-size: 17px;
+  letter-spacing: -0.4px;
+}
+.vehicle-specs {
+  display: flex;
+  gap: 13px;
+  flex-wrap: wrap;
+  color: #7c8f99;
+  font-size: 10px;
+  margin-top: 12px;
+}
+.vehicle-specs > span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.vehicle-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 15px;
+  border-top: 1px solid #edf0f2;
+  border-bottom: 1px solid #edf0f2;
+  margin: 21px 0;
+  padding: 20px 0;
+}
+.vehicle-fields dt {
+  color: #9aabb4;
+  font-size: 10px;
+}
+.vehicle-fields dd {
+  font-size: 11px;
+  font-weight: 500;
+  margin: 7px 0 0;
+  overflow-wrap: anywhere;
+}
+.field-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 550;
+  margin: 0 0 10px;
+}
+.field-label > span {
+  font-size: 9px;
+  font-weight: 400;
+  color: #a2adb4;
+}
+.description-editor {
+  width: 100%;
+  min-height: 104px;
+  resize: vertical;
+  background: #fafbfc;
+  border: 1px solid #e4e9ed;
+  padding: 12px;
+  font-size: 11px;
+  line-height: 1.8;
+  color: #627d8a;
+  border-radius: 6px;
+}
+.description-editor:focus {
+  outline: 2px solid #e9baa055;
+  border-color: #d8a183;
+}
+.description-actions {
+  min-height: 31px;
+  font-size: 9px;
+  color: #a6b1b8;
+  padding-top: 8px;
+}
+.text-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 0;
+  background: none;
+  padding: 0;
+  color: #bd7c56;
+  font-size: 11px;
+}
+.photo-angles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 15px;
+}
+.photo-angles > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  padding: 6px 7px;
+  border-radius: 4px;
+  color: #b0b8be;
+  background: #f7f8f9;
+  border: 1px dashed #e0e6e9;
+}
+.photo-angles > span.present {
+  color: #768f80;
+  background: #f3f7f3;
+  border: 1px solid #e1e9e1;
+}
+.metadata-note {
+  font-size: 9px;
+  line-height: 1.8;
+  color: #a2afb7;
+  margin: 11px 0 20px;
+}
+.review-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  background: #dd7f51;
+  color: white;
+  border: 0;
+  border-radius: 6px;
+  padding: 13px 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.review-button > svg:last-child {
+  margin-left: auto;
+}
+.review-button > svg:first-child {
+  margin-right: auto;
+}
+.review-button:hover:not(:disabled) {
+  background: #c97247;
+}
+.review-panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 676px;
+}
+.review-empty {
+  text-align: center;
+  padding: 100px 20px;
+  flex: 1;
+  color: #9aadb8;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.empty-review-icon {
+  background: #f1f5f7;
+  border: 1px solid #e3ebef;
+  width: 77px;
+  height: 77px;
+  border-radius: 22px;
+  display: grid;
+  place-items: center;
+  color: #91a8b5;
+}
+.review-empty h3 {
+  font:
+    650 15px Manrope,
+    sans-serif;
+  color: #65808e;
+  margin: 24px 0 12px;
+}
+.review-empty p {
+  font-size: 12px;
+  line-height: 1.9;
+  margin: 0;
+}
+.review-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 10px;
+  margin-top: 32px;
+}
+.review-content {
+  padding: 22px;
+}
+.verdict {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 15px;
+  border-radius: 7px;
+  border: 1px solid #ebd8c2;
+  background: #fcf7ed;
+  color: #a1804a;
+}
+.verdict.good {
+  background: #f1f8f3;
+  color: #618471;
+  border-color: #dbeade;
+}
+.verdict strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+}
+.verdict span {
+  display: block;
+  color: #a29177;
+  font-size: 9px;
+  margin-top: 5px;
+}
+.review-summary {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #8196a1;
+  margin: 18px 0 20px;
+}
+.finding {
+  display: flex;
+  gap: 10px;
+  border-top: 1px solid #edf0f2;
+  padding: 15px 0;
+}
+.finding-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 100%;
+  background: #d3ad71;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+.finding-dot.high {
+  background: #d2856c;
+}
+.finding h3 {
+  font-size: 12px;
+  font-weight: 550;
+  margin: 0 0 7px;
+}
+.finding p {
+  color: #91a1ab;
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 0;
+}
+.finding-source {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #a3b1b9;
+  font-size: 9px;
+  margin-top: 8px;
+}
+.message-draft {
+  background: #f7f9fb;
+  border: 1px solid #e4ebef;
+  padding: 15px;
+  border-radius: 7px;
+  margin: 17px 0;
+}
+.message-draft > div {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #748f9e;
+  font-size: 11px;
+}
+.message-draft > div > span {
+  margin-left: auto;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #a0afb9;
+}
+.message-draft p {
+  white-space: pre-line;
+  font-size: 11px;
+  color: #849aa6;
+  line-height: 1.9;
+}
+.message-draft > small {
+  font-size: 9px;
+  color: #a3b2bb;
+}
+.approval-box {
+  border: 1px solid #e5d6cb;
+  background: #fffaf6;
+  padding: 16px;
+  border-radius: 7px;
+}
+.approval-box > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ad7758;
+  font-size: 12px;
+}
+.approval-box p {
+  color: #a28c7d;
+  font-size: 11px;
+  line-height: 1.8;
+  margin: 10px 0 14px;
+}
+.approval-box > small {
+  font-size: 9px;
+  color: #a18a77;
+}
+.approval-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.approval-buttons > button {
+  border: 1px solid #e7ddd4;
+  border-radius: 5px;
+  background: white;
+  color: #a88b75;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 9px 12px;
+  font-size: 10px;
+}
+.approval-buttons > .approve-button {
+  background: #d78253;
+  border-color: #d78253;
+  color: #fff;
+}
+.source-list {
+  margin-top: 25px;
+}
+.source-list > h3 {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #7f96a3;
+  font-size: 11px;
+  font-weight: 550;
+}
+.source-list details {
+  border-bottom: 1px solid #edf0f2;
+  padding: 12px 0;
+  color: #8c9ea9;
+  font-size: 10px;
+}
+.source-list summary {
+  cursor: pointer;
+  line-height: 1.8;
+}
+.source-list summary > span {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 7px;
+  color: #a8b6be;
+  background: #f3f6f7;
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+.source-list p {
+  white-space: pre-line;
+  line-height: 1.9;
+}
+.source-list a {
+  color: #af7a5e;
+  font-size: 10px;
+}
+.source-list small {
+  display: block;
+  margin-top: 10px;
+  font-size: 9px;
+}
+.audit-details {
+  margin-top: 20px;
+  color: #8b9eaa;
+  font-size: 11px;
+}
+.audit-details > summary {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+}
+.audit-details ol {
+  padding-left: 20px;
+}
+.audit-details li {
+  padding: 8px 0;
+  font-size: 10px;
+}
+.audit-details li > small {
+  margin-left: 10px;
+  font-size: 8px;
+  color: #a5b3bb;
+}
+.audit-details li details {
+  margin-top: 5px;
+  color: #a0afb8;
+  font-size: 9px;
+}
+.audit-details pre {
+  max-height: 240px;
+  max-width: 100%;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  overflow: auto;
+  font-size: 9px;
+  background: #f5f7f9;
+  padding: 10px;
+  border-radius: 5px;
+}
+.domain-table {
+  margin-top: 25px;
+}
+.table-note {
+  font-size: 11px;
+  color: #9baab3;
+  padding: 5px 21px;
+  line-height: 1.8;
+}
+.task-row,
+.history-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border-bottom: 1px solid #edf0f2;
+  padding: 19px 21px;
+  width: 100%;
+  min-width: 0;
+}
+.history-row {
+  background: white;
+  border: 0;
+  border-bottom: 1px solid #edf0f2;
+  text-align: left;
+}
+.task-row > div,
+.history-row > div {
+  min-width: 0;
+  flex: 1;
+}
+.task-row strong,
+.history-row strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.task-row small,
+.history-row small {
+  display: block;
+  font-size: 9px;
+  color: #a0afb8;
+  margin-top: 6px;
+}
+.task-icon {
+  width: 33px;
+  height: 33px;
+  display: grid;
+  place-items: center;
+  color: #7d9d8e;
+  border-radius: 7px;
+  background: #f1f7f3;
+}
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+  color: #92a5b1;
+  text-align: center;
+  gap: 10px;
+  font-size: 12px;
+}
+.empty-state h3 {
+  margin: 5px;
+  font-size: 14px;
+}
+@media (max-width: 1100px) {
+  .scenario-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .domain-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .review-panel {
+    min-height: 450px;
+  }
+  .review-empty {
+    padding: 55px 20px;
+  }
+}
+@media (max-width: 600px) {
+  .vehicle-app .sidebar .nav-item {
+    display: flex;
+    width: auto;
+    padding: 9px;
+    margin: 14px 3px 0 0;
+    font-size: 10px;
+  }
+  .vehicle-app .sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .vehicle-app .brand {
+    width: 100%;
+  }
+  .vehicle-app .nav-item > svg:last-child,
+  .vehicle-app .queue-count {
+    display: none;
+  }
+  .vehicle-app .main {
+    margin: 0;
+  }
+  .vehicle-app h1 {
+    font-size: 25px;
+  }
+  .mobile-break {
+    display: initial;
+  }
+  .domain-banner {
+    padding: 12px;
+    align-items: flex-start;
+  }
+  .domain-banner > span {
+    display: none;
+  }
+  .domain-banner p {
+    font-size: 10px;
+  }
+  .scenario-card strong {
+    font-size: 10px;
+  }
+  .vehicle-body,
+  .review-content {
+    padding: 17px;
+  }
+  .vehicle-fields {
+    gap: 17px;
+  }
+  .approval-buttons > button {
+    padding: 9px;
+    font-size: 9px;
+  }
+  .review-panel .small-label {
+    font-size: 7px;
+  }
+}

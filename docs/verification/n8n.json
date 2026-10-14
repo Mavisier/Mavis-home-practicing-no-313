@@ -1,0 +1,15 @@
+{
+  "verified_at": "2026-10-13T07:25:19.981700+00:00",
+  "n8n_version": "2.42.7",
+  "mode": "fixture",
+  "checks": {
+    "unauthorized_rejected": true,
+    "invalid_input_rejected": true,
+    "approval_not_automatic": true,
+    "separate_decision_authority": true,
+    "approved_task_persisted": true,
+    "repeat_approval_idempotent": true,
+    "consistent_record_no_action": true,
+    "rejection_persisted": true
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "verified_at": "2026-10-13T07:38:42.712245+00:00",
+  "backend_tests_passed": 50,
+  "frontend_lint": "passed",
+  "frontend_typecheck": "passed",
+  "frontend_build": "passed",
+  "fixture_evaluation_cases": 6,
+  "n8n_flow_checks": 8,
+  "mcp_read_only_tools": 2,
+  "parallel_ui_reads_passed": 12,
+  "docker_runtime_verified": false,
+  "live_providers_verified": false,
+  "python_advisories": 0,
+  "frontend_advisories": 0,
+  "optional_n8n_platform_audit": {
+    "info": 0,
+    "low": 3,
+    "moderate": 96,
+    "high": 63,
+    "critical": 12,
+    "total": 174
+  },
+  "n8n_note": "External ignored verification runtime; upstream advisories and trigger-header retention disclosed; not production-certified.",
+  "credential_rotation": "Two local webhook credentials rotated; generated execution records removed.",
+  "screenshots": "Three synthetic-only screenshots; no credentials or third-party photos."
+}
