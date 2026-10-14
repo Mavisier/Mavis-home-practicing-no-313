@@ -55,6 +55,8 @@ SOURCE_SUFFIXES = {
     ".md",
 }
 EXTRA_FILES = {
+    ".github/workflows/compose-check.yml",
+    "tools/smoke_compose.py",
     "tools/start_demo.py",
     "tools/build_demo_gif.py",
     "evals/local_model.py",
