@@ -1,8 +1,8 @@
 # Agentic Workflow Assistant
 
-[GitHub repository](https://github.com/Mavisier/agentic-workflow-assistant) ·
+[GitHub repository](https://github.com/Mavisier/Mavis-home-practicing-no-313) ·
 [Five-minute reviewer guide](REVIEWER_GUIDE.md) ·
-[Download source ZIP](https://github.com/Mavisier/agentic-workflow-assistant/archive/refs/heads/main.zip)
+[Download source ZIP](https://github.com/Mavisier/Mavis-home-practicing-no-313/archive/refs/heads/main.zip)
 
 Portfolio prototype for Forward Deployed AI engineering: FastAPI, React/TypeScript,
 PostgreSQL/pgvector, provider abstraction, retrieval, structured outputs, controlled

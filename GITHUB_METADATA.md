@@ -1,6 +1,6 @@
 # GitHub repository metadata
 
-Source repository: [Mavisier/agentic-workflow-assistant](https://github.com/Mavisier/agentic-workflow-assistant)
+Source repository: [Mavisier/Mavis-home-practicing-no-313](https://github.com/Mavisier/Mavis-home-practicing-no-313)
 
 ## Description
 
