@@ -23,5 +23,5 @@ application submission is claimed. Live providers and neural embeddings are
 implemented but unverified; Docker/native PostgreSQL runtime remains unverified.
 Fixture results do not establish LLM accuracy or business impact.
 
-Enable private vulnerability reporting for this public repository. See SECURITY.md
+Private vulnerability reporting is enabled for this public repository. See SECURITY.md
 for the demo boundary and the optional n8n platform's documented limitations.
